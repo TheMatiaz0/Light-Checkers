@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
 	
 	public Player CurrentPlayer { get; private set; }
 
+	public Piece[] WarPieces { get; private set; }
+
 	public const int Width = 8;
 	public const int Height = 8;
 
@@ -43,7 +45,7 @@ public class GameManager : MonoBehaviour
 	protected void Start()
 	{
 		Players = new Player[2] { new Player(Team.Black, "Tomasz"), new Player(Team.White, "Maciej") };
-		CurrentPlayer = Players[Random.Range(0, 2)];
+		CurrentPlayer = Players[Random.Range(0, Players.Length)];
 		PieceSpawn(Team.Black);
 		// SpawnLine(6, Team.White);
 		PieceSpawn(Team.White);
@@ -119,7 +121,7 @@ public class GameManager : MonoBehaviour
 		return listForKeys.Count > 0;
 	}
 
-	public bool CurrentPlayerCanAttack ()
+	public IEnumerable<Piece> CurrentPlayerCanAttack ()
 	{
 		var listForPieces = new List<Piece>();
 
@@ -136,7 +138,7 @@ public class GameManager : MonoBehaviour
 			}
 		}
 
-		return listForPieces.Count > 0;
+		return listForPieces;
 	}
 
 	public void ChangeTurn ()
@@ -174,7 +176,10 @@ public class GameManager : MonoBehaviour
 		}
 
 		CurrentPlayer = GetOtherPlayerFromCurrent();
-		ShouldMove = !CurrentPlayerCanAttack();
+
+		Piece[] pieces = CurrentPlayerCanAttack().ToArray();
+		ShouldMove = !(pieces.Length > 0);
+		WarPieces = pieces;
 	}
 
 

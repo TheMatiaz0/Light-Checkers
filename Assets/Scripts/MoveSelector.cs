@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class MoveSelector : MonoBehaviour
 {
+	[SerializeField]
+	private Material materialToChange = null; 
+
 	public Piece Piece { get; set; }
 	public Vector2Int PointPosition { get; set; }
 
@@ -11,6 +14,11 @@ public class MoveSelector : MonoBehaviour
 	{
 		if (GameManager.Instance.ShouldMove == false)
 		{
+			foreach (var item in GameManager.Instance.WarPieces)
+			{
+				item.MeshRenderer.material = materialToChange;
+			}
+			// rozjaśnij pionka, który musi wykonać atak.
 			return;
 		}
 

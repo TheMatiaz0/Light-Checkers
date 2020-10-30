@@ -10,7 +10,7 @@ public class Geometry
     public static Vector3 PointFromGrid(Vector2Int gridPoint)
     {
         float x = -3.5f + 1.0f * gridPoint.x;
-        float z = -3.5f + 1.0f * gridPoint.y;
+        float z = (-3.5f + 1.0f * gridPoint.y) + 0.028f;
         return new Vector3(x, 0, z);
     }
 

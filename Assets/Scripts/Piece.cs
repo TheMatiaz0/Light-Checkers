@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class Piece : MonoBehaviour
 {
+	public MeshRenderer MeshRenderer { get; private set; } = null;
+
 	public Team CurrentTeam { get; set; }
 	public virtual Vector2Int[] MovementDirections { get; protected set; } = new Vector2Int[] { new Vector2Int(-1, 1), new Vector2Int(1, 1) };
 	public virtual Vector2Int[] OtherDirections { get; protected set; } = new Vector2Int[] { new Vector2Int(-1, -1), new Vector2Int(1, -1) };
@@ -14,6 +16,7 @@ public class Piece : MonoBehaviour
 
 	protected virtual void Awake()
 	{
+		MeshRenderer = GetComponent<MeshRenderer>();
 		if (GameManager.Instance.FightBack == false)
 		{
 			OtherDirections = new Vector2Int[0];
