@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class Board : MonoBehaviour
 {
-    public Material defaultMaterial;
-    public Material selectedMaterial;
+    [SerializeField]
+    private Material blackMaterial;
+    [SerializeField]
+    private Material whiteMaterial;
+    [SerializeField]
+    private Material selectedMaterial;
 
     public GameObject AddPiece(GameObject piecePrefab, int col, int row)
     {
@@ -29,6 +33,12 @@ public class Board : MonoBehaviour
     public void DeselectPiece(GameObject piece)
     {
         MeshRenderer renderers = piece.GetComponentInChildren<MeshRenderer>();
-        renderers.material = defaultMaterial;
+
+        renderers.material = GetMaterialForTeam(piece.GetComponent<Piece>().CurrentTeam);
+    }
+
+    private Material GetMaterialForTeam (Team pieceTeam)
+	{
+        return (pieceTeam == Team.Black) ? blackMaterial : whiteMaterial;
     }
 }
