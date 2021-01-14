@@ -19,6 +19,7 @@ public class Piece : MonoBehaviour
 
 	private List<Vector2Int> trueDirections = new List<Vector2Int>();
 
+
 	protected virtual void Awake()
 	{
 		MeshRenderer = GetComponent<MeshRenderer>();

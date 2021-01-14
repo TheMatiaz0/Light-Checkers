@@ -14,9 +14,17 @@ public class Board : MonoBehaviour
 	[SerializeField]
 	private GameObject boardCubePrefab = null;
 
+	[SerializeField]
+	private GameObject[] woodPlatforms = null;
+
 	protected void Awake()
 	{
 		GenerateBoard();
+
+		foreach (var item in woodPlatforms)
+		{
+			item.SetActive(!GameManager.HideWoodenPlatforms);
+		}
 	}
 
 	private void GenerateBoard()

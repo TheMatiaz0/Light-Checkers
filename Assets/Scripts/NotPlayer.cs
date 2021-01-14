@@ -14,9 +14,10 @@ public abstract class NotPlayer : Player
 	{
 		// copy all pieces from the board...
 		List<Piece> copiedThisPlayerPieces = this.PlayerPieces.ToList();
-		// List<Piece> copiedOtherPlayerPieces = GameManager.Instance.GetOtherPlayerFromCurrent().PlayerPieces.ToList();
-		yield return DepthAIBehaviour(copiedThisPlayerPieces);
+		List<Piece> copiedOtherPlayerPieces = GameManager.Instance.GetOtherPlayerFromCurrent().PlayerPieces.ToList();
+		yield return DepthAIBehaviour(copiedThisPlayerPieces, copiedOtherPlayerPieces);
 	}
 
-	protected abstract IEnumerator DepthAIBehaviour(List<Piece> copiedPieces/*,  List<Piece> copiedOtherPlayerPieces */);
+
+	protected abstract IEnumerator DepthAIBehaviour(List<Piece> copiedPieces,  List<Piece> copiedOtherPlayerPieces);
 }

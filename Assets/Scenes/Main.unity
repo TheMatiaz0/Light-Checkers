@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 180896665}
   - component: {fileID: 180896664}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: Wood1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 191148822}
   - component: {fileID: 191148821}
   m_Layer: 0
-  m_Name: Cube (4)
+  m_Name: Wood4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -298,7 +298,7 @@ GameObject:
   - component: {fileID: 342721578}
   - component: {fileID: 342721577}
   m_Layer: 0
-  m_Name: Cube (2)
+  m_Name: Wood2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -606,7 +606,7 @@ GameObject:
   - component: {fileID: 700111997}
   - component: {fileID: 700111996}
   m_Layer: 0
-  m_Name: Cube (3)
+  m_Name: Wood3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -943,6 +943,11 @@ MonoBehaviour:
   lightMaterial: {fileID: 2100000, guid: b5227dfe66f370845b8b011dac7385e8, type: 2}
   boardCubePrefab: {fileID: 1308018567749845039, guid: ea952a4df3c0e1b419ac9bec0804757d,
     type: 3}
+  woodPlatforms:
+  - {fileID: 180896662}
+  - {fileID: 342721575}
+  - {fileID: 700111994}
+  - {fileID: 191148819}
 --- !u!114 &892110091
 MonoBehaviour:
   m_ObjectHideFlags: 0

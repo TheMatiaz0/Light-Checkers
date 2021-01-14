@@ -8,7 +8,7 @@ public class RandomAI : NotPlayer
 	{
 	}
 
-	protected override IEnumerator DepthAIBehaviour(List<Piece> copiedPieces)
+	protected override IEnumerator DepthAIBehaviour(List<Piece> copiedPieces, List<Piece> copiedOtherPlayerPieces)
 	{
 		Piece piece;
 		if ((piece = GameManager.Instance.GetAtLeastOneAttackingPiece()) == null)
@@ -26,7 +26,7 @@ public class RandomAI : NotPlayer
 		else
 		{
 			copiedPieces.Remove(piece);
-			yield return DepthAIBehaviour(copiedPieces);
+			yield return DepthAIBehaviour(copiedPieces, copiedOtherPlayerPieces);
 		}
 	}
 

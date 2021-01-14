@@ -25,9 +25,11 @@ public class GameManager : MonoBehaviour
 
 	[SerializeField]
 	private Pawn[] pawnPrefabs = null;
+	public Pawn[] PawnPrefabs => pawnPrefabs;
 
 	[SerializeField]
 	private Queen[] queenPrefabs = null;
+	public Queen[] QueenPrefabs => queenPrefabs;
 
 	public static Player[] Players { get; set; } = null;
 
@@ -63,6 +65,8 @@ public class GameManager : MonoBehaviour
 	public static bool MoveBackwards { get; set; } = false;
 
 	public static uint NumberForField { get; set; } = 0;
+
+	public static bool HideWoodenPlatforms { get; set; } = false;
 
 	/// <summary>
 	/// You can't move if all your pieces are none or blocked or if you can attack as a piece.
@@ -166,10 +170,15 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	private Piece SpawnSinglePiece (int col, int row, Team pieceTeam, Piece[] figures)
+	public Piece SpawnSinglePiece (int col, int row, Team pieceTeam, Piece[] figures, bool shouldAdd = true)
 	{
 		Piece newlyPiece = board.AddPiece(figures[(int)pieceTeam], col, row);
-		Players.First(x => x.CurrentTeam == pieceTeam).PlayerPieces.Add(newlyPiece);
+
+		if (shouldAdd)
+		{
+			Players.First(x => x.CurrentTeam == pieceTeam).PlayerPieces.Add(newlyPiece);
+		}
+
 		newlyPiece.CurrentTeam = pieceTeam;
 		return newlyPiece;
 	}
@@ -325,7 +334,11 @@ public class GameManager : MonoBehaviour
 
 		if (firstRotate == false)
 		{
-			camMovement.AdjustCamera(CurrentPlayer.CurrentTeam);
+			if (!(CurrentPlayer is NotPlayer))
+			{
+				camMovement.AdjustCamera(CurrentPlayer.CurrentTeam);
+			}
+
 			firstRotate = true;
 		}
 	}

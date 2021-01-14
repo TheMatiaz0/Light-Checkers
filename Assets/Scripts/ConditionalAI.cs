@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-
+/*
 public class ConditionalAI : NotPlayer
 {
 	public ConditionalAI(Team team, string name) : base(team, name)
@@ -14,3 +14,4 @@ public class ConditionalAI : NotPlayer
 		yield return null;
 	}
 }
+*/
