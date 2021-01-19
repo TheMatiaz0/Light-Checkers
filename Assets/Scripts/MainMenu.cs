@@ -11,7 +11,7 @@ public class MainMenu : MonoBehaviour
 	public static MainMenu Instance { get; private set; } = null;
 
 	[SerializeField]
-	private MenuChangeable mainTitle = null;
+	private MenuChangeable mainTitle = null, version = null, author = null;
 
 	[SerializeField]
 	private Button[] allButtons = null;
@@ -27,6 +27,7 @@ public class MainMenu : MonoBehaviour
 
 	[SerializeField]
 	private GameObject[] allPanelsInMenu = null;
+
 
 	public readonly Color32 lightEffectColor = new Color(255, 255, 255);
 	public readonly Color32 darkEffectColor = new Color(0, 0, 0);
@@ -98,6 +99,8 @@ public class MainMenu : MonoBehaviour
 
 	public void ClickExitBtn()
 	{
-		Application.Quit(0);
+		author.SetupColor(new Color32((byte)author.GraphicToChange.color.r, (byte)author.GraphicToChange.color.g, (byte)author.GraphicToChange.color.b, 0), new Color32(), 3);
+		BtnAnimation(3, false);
+		// Application.Quit(0);
 	}
 }
