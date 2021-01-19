@@ -43,7 +43,7 @@ public class IconHighlighter : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
 	public void Enable(bool isTrue = true)
 	{
-		disableEverything = isTrue;
+		disableEverything = !isTrue;
 
 		if (!isTrue)
 		{
