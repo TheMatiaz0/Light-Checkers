@@ -41,10 +41,14 @@ public class IconHighlighter : MonoBehaviour, IPointerEnterHandler, IPointerExit
 		}
 	}
 
-	public void Disable()
+	public void Enable(bool isTrue = true)
 	{
-		disableEverything = true;
-		ExitIcon();
+		disableEverything = isTrue;
+
+		if (!isTrue)
+		{
+			ExitIcon();
+		}
 	}
 
 	private void ExitIcon()

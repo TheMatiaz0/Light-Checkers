@@ -1,6 +1,4 @@
 using Cyberevolver;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -18,16 +16,15 @@ public class GameOptions : MonoBehaviour
 	[SerializeField]
 	private Toggle moreAttacks = null;
 
-
 	private GameManager.Mode mode = GameManager.Mode.Local;
 
 	[SerializeField]
-	private Pair<Dropdown> teamSelection = null;
+	private Pair<Toggle> darkSelection = null;
+	[SerializeField]
+	private Pair<Toggle> lightSelection = null;
 
 	[SerializeField]
 	private Pair<InputField> allNickname = null;
-	// [SerializeField]
-	// private Pair<ToggleGroup> allToggleGroups = null;
 
 	protected void OnEnable()
 	{
@@ -47,43 +44,93 @@ public class GameOptions : MonoBehaviour
 		GameManager.FightBackwards = isTrue;
 	}
 
+	private void AppearDisappear(RectTransform rectTransform)
+	{
+		LeanTween.cancel(rectTransform);
+
+		LeanTween.alphaText(rectTransform, 1, 0.05f)
+	    .setOnComplete(() => LeanTween.alphaText(rectTransform, 0, 6f));
+	}
+
 	public void PlayBtn()
 	{
-		Team one = (Team)teamSelection.First.value;
-		Team two = (Team)teamSelection.Second.value;
+		// DARK: one playerOne == true, two playerTwo == false
+		// LIGHT: three playerOne == false, four playerTwo == true
+		bool one = darkSelection.First.isOn;
+		bool two = darkSelection.Second.isOn;
+		bool three = lightSelection.First.isOn;
+		bool four = lightSelection.Second.isOn;
+
+		Team playerOneTeam = Team.White;
+		Team playerTwoTeam = Team.Black;
+
 
 
 		if (one == two)
 		{
-			Debug.Log("The same team");
+			AppearDisappear(ErrorInfoManager.Instance.PlayerTwoError.rectTransform);
+			ErrorInfoManager.Instance.PlayerTwoError.text = "Are you nuts? You can't play in the same team. This is COMPETITIVE GAME.";
 			return;
 		}
 
-		if (string.IsNullOrEmpty(allNickname.First.text) || string.IsNullOrEmpty(allNickname.Second.text))
+		if (three == four)
 		{
-			Debug.Log("Null name");
+			AppearDisappear(ErrorInfoManager.Instance.PlayerOneError.rectTransform);
+			ErrorInfoManager.Instance.PlayerOneError.text = "Are you nuts? You can't play in the same team. This is COMPETITIVE GAME.";
 			return;
 		}
 
-		// Randomize nickname position not team, team stays the same.
-		// [0], [1] - dwóch graczy. Losuj od 0 do 2.
+		if (string.IsNullOrEmpty(allNickname.First.text))
+		{
+			AppearDisappear(ErrorInfoManager.Instance.PlayerOneError.rectTransform);
+			ErrorInfoManager.Instance.PlayerOneError.text = "Invalid nickname, don't mess with input fields.";
+			return;
+		}
+
+		if (string.IsNullOrEmpty(allNickname.Second.text))
+		{
+			AppearDisappear(ErrorInfoManager.Instance.PlayerTwoError.rectTransform);
+			ErrorInfoManager.Instance.PlayerTwoError.text = "Invalid nickname, don't mess with input fields.";
+			return;
+		}
+
+		if (one)
+		{
+			playerOneTeam = Team.Black;
+		}
+
+		if (two)
+		{
+			playerTwoTeam = Team.Black;
+		}
+
+		if (three)
+		{
+			playerOneTeam = Team.White;
+		}
+
+		if (four)
+		{
+			playerTwoTeam = Team.White;
+		}
 
 		switch (mode)
 		{
 			case GameManager.Mode.Local:
-				GameManager.Players = new Player[2] { new Player(one, allNickname.First.text), new Player(two, allNickname.Second.text) };
+				GameManager.Players = new Player[2] { new Player(playerOneTeam, allNickname.First.text), new Player(playerTwoTeam, allNickname.Second.text) };
 				break;
 
 			case GameManager.Mode.AIAI:
-				GameManager.Players = new Player[2] { new RandomAI(one, allNickname.First.text), new RandomAI(two, allNickname.Second.text) };
+				GameManager.Players = new Player[2] { new RandomAI(playerOneTeam, allNickname.First.text), new RandomAI(playerTwoTeam, allNickname.Second.text) };
 				break;
 
 			case GameManager.Mode.LocalAI:
-				GameManager.Players = new Player[2] { new Player(one, allNickname.First.text), new RandomAI(two, allNickname.Second.text) };
+				GameManager.Players = new Player[2] { new Player(playerOneTeam, allNickname.First.text), new RandomAI(playerTwoTeam, allNickname.Second.text) };
 				break;
 
 			case GameManager.Mode.Online:
-				Debug.Log("Oj nie nie byczq");
+				AppearDisappear(ErrorInfoManager.Instance.DropdownError.rectTransform);
+				ErrorInfoManager.Instance.DropdownError.text = "Maybe one day...";
 				return;
 		}
 
@@ -103,5 +150,10 @@ public class GameOptions : MonoBehaviour
 	public void MoreAttacksToggle(bool isTrue)
 	{
 		GameManager.AttackMore = isTrue;
+	}
+
+	public void ClickReturnBtn()
+	{
+		MainMenu.Instance.BtnAnimation(0, true);
 	}
 }
