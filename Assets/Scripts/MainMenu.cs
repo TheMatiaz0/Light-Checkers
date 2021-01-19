@@ -8,112 +8,72 @@ using Cyberevolver;
 
 public class MainMenu : MonoBehaviour
 {
-	[SerializeField]
-	private Toggle fightBackwards = null;
+	public static MainMenu Instance { get; private set; } = null;
 
 	[SerializeField]
-	private Toggle walkBackwards = null;
+	private MenuChangeable mainTitle = null;
 
 	[SerializeField]
-	private Toggle mustAttack = null;
-	[SerializeField]
-	private Toggle moreAttacks = null;
-
-
-	private GameManager.Mode mode = GameManager.Mode.Local;
+	private Button[] allButtons = null;
 
 	[SerializeField]
-	private Pair<Dropdown> teamSelection = null;
+	private MenuChangeable[] allTextsAssociatedWithButtons = null;
 
 	[SerializeField]
-	private Pair<InputField> allNickname = null;
-	// [SerializeField]
-	// private Pair<ToggleGroup> allToggleGroups = null;
+	private GameObject buttonContainer = null;
 
-	protected void OnEnable()
+	[SerializeField]
+	private Transform usedButtonContainer = null;
+
+	public readonly Color32 lightEffectColor = new Color(255, 255, 255);
+	public readonly Color32 darkEffectColor = new Color(0, 0, 0);
+
+	protected void Awake()
 	{
-		fightBackwards.isOn = GameManager.FightBackwards;
-		mustAttack.isOn = GameManager.MustAttack;
-		walkBackwards.isOn = GameManager.MoveBackwards;
-		moreAttacks.isOn = GameManager.AttackMore;
+		Instance = this;
 	}
 
-	public void MustAttackCheck (bool isTrue)
+	public Color32 GetReversedColor(Color32 original)
 	{
-		GameManager.MustAttack = isTrue;
+		return (original.Equals(darkEffectColor)) ?
+			new Color32(lightEffectColor.r, lightEffectColor.g, lightEffectColor.b, original.a) :
+			new Color32(darkEffectColor.r, darkEffectColor.g, darkEffectColor.b, original.a);
 	}
 
-	public void FightBackwardsCheck (bool isTrue)
+	public void ClickPlayBtn()
 	{
-		GameManager.FightBackwards = isTrue;
+		allButtons[0].GetComponent<IconHighlighter>().Disable();
+		allButtons[0].interactable = false;
+
+		allButtons[0].image.color = Color.white;
+		allButtons[0].transform.SetParent(usedButtonContainer);
+		allTextsAssociatedWithButtons[0].transform.SetParent(usedButtonContainer);
+
+		// allTextsAssociatedWithButtons[0].SetupColor(GetReversedColor(allTextsAssociatedWithButtons[0].GraphicToChange.color), 
+			// GetReversedColor(allTextsAssociatedWithButtons[0].MeshEffect.effectColor), 0.44f);
+
+		allTextsAssociatedWithButtons[0].SpecficGraphic.fontSize = 65;
+		mainTitle.SpecficGraphic.text = "<i>Dark</i>  Checkers";
+
+		buttonContainer.SetActive(false);
+
+		LeanTween.move(allTextsAssociatedWithButtons[0].gameObject, new Vector2(mainTitle.transform.position.x + 10,
+			mainTitle.transform.position.y - 160), 0.1f);
+		LeanTween.scale(allButtons[0].gameObject, new Vector2(10, 10), 0.4f);
 	}
 
-	public void PlayBtn ()
+	public void ClickOptionsBtn()
 	{
-		Team one = (Team)teamSelection.First.value;
-		Team two = (Team)teamSelection.Second.value;
 
-
-		if (one == two)
-		{
-			Debug.Log("The same team");
-			return;
-		}
-
-		if (string.IsNullOrEmpty(allNickname.First.text) || string.IsNullOrEmpty(allNickname.Second.text))
-		{
-			Debug.Log("Null name");
-			return;
-		}
-
-		// Randomize nickname position not team, team stays the same.
-		// [0], [1] - dwóch graczy. Losuj od 0 do 2.
-
-		switch (mode)
-		{
-			case GameManager.Mode.Local:
-				GameManager.Players = new Player[2] { new Player(one, allNickname.First.text), new Player(two, allNickname.Second.text) };
-				break;
-
-			case GameManager.Mode.AIAI:
-				GameManager.Players = new Player[2] { new RandomAI(one, allNickname.First.text), new RandomAI(two, allNickname.Second.text) };
-				break;
-
-			case GameManager.Mode.LocalAI:
-				GameManager.Players = new Player[2] { new Player(one, allNickname.First.text), new RandomAI(two, allNickname.Second.text) };
-				break;
-
-			case GameManager.Mode.Online:
-				Debug.Log("Oj nie nie byczq");
-				return;
-		}
-
-		SceneManager.LoadScene("Main");
 	}
 
-	protected void Update()
+	public void ClickCreateBoardBtn()
 	{
-		if (Input.GetKeyDown(KeyCode.G))
-		{
-			GameManager.Players = GameManager.GetMostDefaultPlayers();
-			SceneManager.LoadScene("Main");
-			return;
-		}
+
 	}
 
-	public void WalkBackwardsCheck(bool isTrue)
+	public void ClickExitBtn()
 	{
-		GameManager.MoveBackwards = isTrue;
+		Application.Quit(0);
 	}
-
-	public void SelectModeDropdown(int option)
-	{
-		mode = (GameManager.Mode)option;
-	}
-
-	public void MoreAttacksToggle (bool isTrue)
-	{
-		GameManager.AttackMore = isTrue;
-	}
-
 }

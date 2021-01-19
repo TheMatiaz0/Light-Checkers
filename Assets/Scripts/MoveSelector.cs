@@ -42,7 +42,6 @@ public class MoveSelector : MonoBehaviour
 
 	protected void Move ()
 	{
-		Debug.Log($"{Geometry.GridFromPoint(Piece.transform.position)}, {PointPosition}");
 		GameManager.Instance.MovePiece(Piece, PointPosition);
 	}
 

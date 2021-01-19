@@ -35,6 +35,9 @@ public class GameManager : MonoBehaviour
 
 	public Player CurrentPlayer { get; private set; }
 
+	/// <summary>
+	/// Pieces you have to/can remove from the board.
+	/// </summary>
 	public Piece[] WarPieces { get; private set; }
 
 	public const int Width = 8;
@@ -59,14 +62,18 @@ public class GameManager : MonoBehaviour
 	/// Do you have to attack a grid where more pieces are?
 	/// </summary>
 	public static bool AttackMore { get; set; } = true;
+
 	/// <summary>
 	/// Can pawns walk backwards?
 	/// </summary>
 	public static bool MoveBackwards { get; set; } = false;
 
-	public static uint NumberForField { get; set; } = 0;
 
 	public static bool HideWoodenPlatforms { get; set; } = false;
+
+	public static uint NumberForField { get; set; } = 0;
+
+
 
 	/// <summary>
 	/// You can't move if all your pieces are none or blocked or if you can attack as a piece.
