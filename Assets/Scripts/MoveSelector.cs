@@ -43,6 +43,7 @@ public class MoveSelector : MonoBehaviour
 	protected void Move ()
 	{
 		GameManager.Instance.MovePiece(Piece, PointPosition);
+		SoundManager.Instance.PlayWalk();
 	}
 
 	protected void ChangeTurn ()

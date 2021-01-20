@@ -10,7 +10,7 @@ public class Piece : MonoBehaviour
 	public Team CurrentTeam { get; set; }
 	protected virtual Vector2Int[] MovementDirections { get; set; } = new Vector2Int[] { new Vector2Int(-1, 1), new Vector2Int(1, 1) };
 
-	// For beating backwards
+	// For beating backwards, NOT WORKING AT THE MOMENT
 	protected virtual Vector2Int[] OtherDirections { get; set; } = new Vector2Int[] { new Vector2Int(-1, -1), new Vector2Int(1, -1) };
 
 	public virtual int PointsForKill { get { return _PointsForKill * (CurrentTeam == Team.Black ? -1 : 1); } protected set { _PointsForKill = value; } }

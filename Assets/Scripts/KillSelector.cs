@@ -30,5 +30,6 @@ public class KillSelector : MoveSelector
 	protected void Kill ()
 	{
 		GameManager.Instance.KillPiece(PieceToKill);
+		SoundManager.Instance.PlayKill();
 	}
 }
