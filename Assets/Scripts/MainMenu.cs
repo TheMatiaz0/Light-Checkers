@@ -84,7 +84,7 @@ public class MainMenu : MonoBehaviour
 		// LeanTween.move(allTextsAssociatedWithButtons[number].gameObject, moveVector, 0.1f);
 		LeanTween.scale(allButtons[number].gameObject, scaleVector, 0.3f).setOnComplete(() => allPanelsInMenu[number + 1].SetActive(!isReversed));
 
-		allPanelsInMenu[number].SetActive(isReversed);
+		allPanelsInMenu[0].SetActive(isReversed);
 	}
 
 	public void ClickOptionsBtn()
@@ -99,8 +99,10 @@ public class MainMenu : MonoBehaviour
 
 	public void ClickExitBtn()
 	{
-		author.SetupColor(new Color32((byte)author.GraphicToChange.color.r, (byte)author.GraphicToChange.color.g, (byte)author.GraphicToChange.color.b, 0), new Color32(), 3);
+		author.SetupColor(new Color32((byte)author.GraphicToChange.color.r, (byte)author.GraphicToChange.color.g, (byte)author.GraphicToChange.color.b, 0), new Color32(), 0.2f);
+		mainTitle.SetupColor(new Color32((byte)author.GraphicToChange.color.r, (byte)author.GraphicToChange.color.g, (byte)author.GraphicToChange.color.b, 0), new Color32(), 0.2f);
+		version.SetupColor(new Color32((byte)author.GraphicToChange.color.r, (byte)author.GraphicToChange.color.g, (byte)author.GraphicToChange.color.b, 0), new Color32(), 0.2f);
 		BtnAnimation(3, false);
-		// Application.Quit(0);
+		Application.Quit(0);
 	}
 }

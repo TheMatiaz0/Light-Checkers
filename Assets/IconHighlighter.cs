@@ -38,7 +38,8 @@ public class IconHighlighter : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
 	private void EnterIcon()
 	{
-		animator.enabled = true;
+		animator.SetBool("targeted", true);
+		// animator.enabled = true;
 		foreach (var item in elementsToHighlight)
 		{
 			item.SetupColor(elementsColorAfterHighlight, shadowColorAfterHighlight, 2.44f);
@@ -57,7 +58,8 @@ public class IconHighlighter : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
 	private void ExitIcon()
 	{
-		animator.enabled = false;
+		animator.SetBool("targeted", false);
+		// animator.enabled = false;
 
 		foreach (var item in elementsToHighlight)
 		{
