@@ -28,6 +28,11 @@ public class MainMenu : MonoBehaviour
 	[SerializeField]
 	private GameObject[] allPanelsInMenu = null;
 
+	[SerializeField]
+	private AudioClip musicOne = null;
+
+	[SerializeField]
+	private AudioClip musicTwo = null;
 
 	public readonly Color32 lightEffectColor = new Color(255, 255, 255);
 	public readonly Color32 darkEffectColor = new Color(0, 0, 0);
@@ -85,6 +90,7 @@ public class MainMenu : MonoBehaviour
 		LeanTween.scale(allButtons[number].gameObject, scaleVector, 0.3f).setOnComplete(() => allPanelsInMenu[number + 1].SetActive(!isReversed));
 
 		allPanelsInMenu[0].SetActive(isReversed);
+		MusicManager.Instance.ChangeMusic(isReversed == true ? musicOne : musicTwo);
 	}
 
 	public void ClickOptionsBtn()

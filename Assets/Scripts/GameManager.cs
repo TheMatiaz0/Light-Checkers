@@ -89,6 +89,9 @@ public class GameManager : MonoBehaviour
 
 	private CameraMovement camMovement = null;
 
+	[SerializeField]
+	private AudioClip[] musicClips = null;
+
 
 
 	protected void Awake()
@@ -348,6 +351,28 @@ public class GameManager : MonoBehaviour
 
 			firstRotate = true;
 		}
+
+		if (CurrentPlayer.PlayerPieces.Count <= 2 || GetOtherPlayerFromCurrent().PlayerPieces.Count <= 2)
+		{
+			MusicManager.Instance.ChangeMusic(musicClips[3]);
+			return;
+		}
+
+		if (CurrentPlayer.PlayerPieces.Count <= 7 || GetOtherPlayerFromCurrent().PlayerPieces.Count <= 7)
+		{
+			MusicManager.Instance.ChangeMusic(musicClips[2]);
+			return;
+		}
+
+		if (CurrentPlayer.PlayerPieces.Count <= 9 || GetOtherPlayerFromCurrent().PlayerPieces.Count <= 9)
+		{
+			MusicManager.Instance.ChangeMusic(musicClips[1]);
+			return;
+		}
+
+
+
+
 	}
 
 	public void SetGameOver (Player[] loser)

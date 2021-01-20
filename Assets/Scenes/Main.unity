@@ -697,8 +697,9 @@ GameObject:
   m_Component:
   - component: {fileID: 301377005}
   - component: {fileID: 301377006}
+  - component: {fileID: 301377007}
   m_Layer: 0
-  m_Name: AudioManager
+  m_Name: MusicManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -712,11 +713,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 301377004}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -9.120707, y: 1.89624, z: -0.31000024}
-  m_LocalScale: {x: 5.715565, y: 3.4416, z: 1.9966}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
-  m_Father: {fileID: 892110089}
-  m_RootOrder: 8
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &301377006
 AudioSource:
@@ -815,6 +816,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &301377007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301377004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51d45c7a321c1ec46a39f64206773b13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 301377006}
 --- !u!1 &342721575
 GameObject:
   m_ObjectHideFlags: 0
@@ -1413,6 +1427,11 @@ MonoBehaviour:
   - {fileID: 2756170732788533280, guid: 64c314a63b79aed44867f313002adf46, type: 3}
   - {fileID: -3743253470417968595, guid: 8e755f98117b32f45a940c84f684e433, type: 3}
   gameOverFreezeMenu: {fileID: 1834188004}
+  musicClips:
+  - {fileID: 8300000, guid: 9a68fea28309aaa44921de049c749bc7, type: 3}
+  - {fileID: 8300000, guid: 90e84bd7bc11bbc4d9b77f83e3d7a9e9, type: 3}
+  - {fileID: 8300000, guid: 8c6ef6092ee3b4b478577ab39f551d5d, type: 3}
+  - {fileID: 8300000, guid: 0a8629f75699e4a4d9317a0fc6271cdc, type: 3}
 --- !u!4 &516697439
 Transform:
   m_ObjectHideFlags: 0
@@ -2616,7 +2635,6 @@ Transform:
   - {fileID: 700111995}
   - {fileID: 191148820}
   - {fileID: 545845755}
-  - {fileID: 301377005}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
