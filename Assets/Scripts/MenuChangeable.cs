@@ -24,12 +24,12 @@ public class MenuChangeable : MonoBehaviour
 		LeanTween.value(graphicToChange.gameObject, graphicToChange.color, colorForGraphic, time).setOnUpdate((Color val) =>
 		{
 			graphicToChange.color = val;
-		});
+		}).setIgnoreTimeScale(true);
 
 		if (meshEffect != null)
 		{
-			LeanTween.color(meshEffect.gameObject, colorForEffect, time);
-			LeanTween.value(meshEffect.gameObject, meshEffect.effectColor.a, colorForEffect.a, time);
+			LeanTween.color(meshEffect.gameObject, colorForEffect, time).setIgnoreTimeScale(true);
+			LeanTween.value(meshEffect.gameObject, meshEffect.effectColor.a, colorForEffect.a, time).setIgnoreTimeScale(true);
 		}
 	}
 }

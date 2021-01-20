@@ -9,6 +9,9 @@ public class PauseMenu : MonoBehaviour
 	[SerializeField]
 	private FreezeMenu gameOverFreezeMenu = null;
 
+	[SerializeField]
+	private IconHighlighter[] buttons = null;
+
 	public void RestartGameBtn()
 	{
 		gameOverFreezeMenu.EnableMenuWithPause(false);
@@ -19,5 +22,19 @@ public class PauseMenu : MonoBehaviour
 	{
 		gameOverFreezeMenu.EnableMenuWithPause(false);
 		SceneManager.LoadScene("Menu");
+	}
+
+	protected void OnEnable()
+	{
+		TileSelector.Instance.InputActive = false;
+	}
+
+	protected void OnDisable()
+	{
+		TileSelector.Instance.InputActive = true;
+		foreach (var item in buttons)
+		{
+			item.Enable(false);
+		}
 	}
 }
