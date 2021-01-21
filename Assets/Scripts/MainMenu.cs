@@ -90,17 +90,20 @@ public class MainMenu : MonoBehaviour
 		LeanTween.scale(allButtons[number].gameObject, scaleVector, 0.3f).setOnComplete(() => allPanelsInMenu[number + 1].SetActive(!isReversed));
 
 		allPanelsInMenu[0].SetActive(isReversed);
-		MusicManager.Instance.ChangeMusic(isReversed == true ? musicOne : musicTwo);
-	}
-
-	public void ClickOptionsBtn()
-	{
-
+		if (number == 0)
+		{
+			MusicManager.Instance.ChangeMusic(isReversed == true ? musicOne : musicTwo);
+		}
 	}
 
 	public void ClickCreateBoardBtn()
 	{
+		BtnAnimation(1, false);
+	}
 
+	public void ClickOptionsBtn()
+	{
+		BtnAnimation(2, false);
 	}
 
 	public void ClickExitBtn()

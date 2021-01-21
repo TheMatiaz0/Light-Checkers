@@ -15,6 +15,8 @@ public class Player
 	public string Nickname { get; }
 	public int Points { get; set; }
 
+	public float Time;
+
 	public Player(Team team, string nickname)
 	{
 		PlayerPieces = new List<Piece>();

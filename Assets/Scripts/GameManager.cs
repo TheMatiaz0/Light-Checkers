@@ -92,6 +92,9 @@ public class GameManager : MonoBehaviour
 	[SerializeField]
 	private AudioClip[] musicClips = null;
 
+	[SerializeField]
+	private Animator timerAnimator = null;
+
 
 
 	protected void Awake()
@@ -149,6 +152,7 @@ public class GameManager : MonoBehaviour
 		DefaultSpawn(Team.White);
 		DefaultSpawn(Team.Black);
 
+		TimerController.Instance.SetupCountdown(Players);
 		StartedPreviousGame = true;
 		// First change of turn, turn = 1 from now on
 		ChangeTurn();
@@ -352,6 +356,9 @@ public class GameManager : MonoBehaviour
 			firstRotate = true;
 		}
 
+
+		TimerController.Instance.ChangeCountdown(CurrentPlayer);
+
 		if (CurrentPlayer.PlayerPieces.Count <= 2 || GetOtherPlayerFromCurrent().PlayerPieces.Count <= 2)
 		{
 			MusicManager.Instance.ChangeMusic(musicClips[3]);
@@ -369,10 +376,6 @@ public class GameManager : MonoBehaviour
 			MusicManager.Instance.ChangeMusic(musicClips[1]);
 			return;
 		}
-
-
-
-
 	}
 
 	public void SetGameOver (Player[] loser)

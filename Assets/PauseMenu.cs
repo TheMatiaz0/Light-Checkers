@@ -37,6 +37,11 @@ public class PauseMenu : MonoBehaviour
 
 	protected void OnEnable()
 	{
+		foreach (var item in buttons)
+		{
+			item.Enable(true);
+		}
+
 		TileSelector.Instance.InputActive = false;
 		TileSelector.Instance.DeactiveAnyHighlight();
 	}

@@ -1,4 +1,6 @@
 using Cyberevolver;
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -26,12 +28,37 @@ public class GameOptions : MonoBehaviour
 	[SerializeField]
 	private Pair<InputField> allNickname = null;
 
+	[SerializeField]
+	private GameObject[] rules = null;
+
+	[SerializeField]
+	private GameObject[] playersSection = null;
+
+	[SerializeField]
+	private GameObject[] eachPlayer = null;
+
+	private Coroutine aliveCoroutine = null;
+
 	protected void OnEnable()
 	{
+		aliveCoroutine = StartCoroutine(LoopArrayWithDelay(rules, 0.09f, 
+			LoopArrayWithDelay(playersSection, 0.12f, LoopArrayWithDelay(eachPlayer, 0.06f, null))));
+
 		fightBackwards.isOn = GameManager.FightBackwards;
 		mustAttack.isOn = GameManager.MustAttack;
 		walkBackwards.isOn = GameManager.MoveBackwards;
 		moreAttacks.isOn = GameManager.AttackMore;
+	}
+
+	private IEnumerator LoopArrayWithDelay(GameObject[] arr, float seconds, IEnumerator next)
+	{
+		foreach (var item in arr)
+		{
+			item.SetActive(true);
+			yield return new WaitForSeconds(seconds);
+		}
+
+		yield return next;
 	}
 
 	public void MustAttackCheck(bool isTrue)
@@ -154,6 +181,23 @@ public class GameOptions : MonoBehaviour
 
 	public void ClickReturnBtn()
 	{
+		StopAllCoroutines();
+
+		foreach (var item in rules)
+		{
+			item.SetActive(false);
+		}
+
+		foreach (var item in playersSection)
+		{
+			item.SetActive(false);
+		}
+
+		foreach (var item in eachPlayer)
+		{
+			item.SetActive(false);
+		}
+
 		MainMenu.Instance.BtnAnimation(0, true);
 	}
 }

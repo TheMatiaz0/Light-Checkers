@@ -19,6 +19,11 @@ public class GameOverMenu : MonoBehaviour
 
 	protected void OnEnable()
 	{
+		foreach (var item in buttons)
+		{
+			item.Enable(true);
+		}
+
 		TileSelector.Instance.InputActive = false;
 		// TileSelector.Instance.DeactiveAnyHighlight();
 	}
@@ -34,7 +39,7 @@ public class GameOverMenu : MonoBehaviour
 
 	public void SeeBoardBtn()
 	{
-		TileSelector.Instance.DeactiveAnyHighlight();
+		// TileSelector.Instance.DeactiveAnyHighlight();
 		gameOverFreezeMenu.SetupKeyCode(KeyCode.Escape);
 
 		foreach (var item in gameOverFreezeMenu.BlockOtherFreezes)
