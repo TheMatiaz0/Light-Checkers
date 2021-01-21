@@ -18,9 +18,6 @@ public class TimerController : MonoBehaviour
     private Text secondCountdown = null;
 
     [SerializeField]
-    private TimeSpan timeEnd = new TimeSpan(0, 5, 0);
-
-    [SerializeField]
     private Animator timerAnimator = null;
 
 	protected void Awake()
@@ -28,11 +25,11 @@ public class TimerController : MonoBehaviour
         Instance = this;
     }
 
-    public void SetupCountdown(Player[] players)
+    public void SetupCountdown(Player[] players, TimeSpan time)
 	{
 		foreach (var item in players)
 		{
-            item.Time = (float)timeEnd.TotalSeconds;
+            item.Time = (float)time.TotalSeconds;
 		}
 	}
 
@@ -65,6 +62,8 @@ public class TimerController : MonoBehaviour
             action(i);
             yield return new WaitForSeconds(0.01f);
         }
+
+        GameManager.Instance.SetGameOver(new Player[] { currentPlayer});
 	}
 
     private void Change(ref float whichOne, float newVal)

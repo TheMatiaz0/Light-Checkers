@@ -152,7 +152,7 @@ public class GameManager : MonoBehaviour
 		DefaultSpawn(Team.White);
 		DefaultSpawn(Team.Black);
 
-		TimerController.Instance.SetupCountdown(Players);
+		TimerController.Instance.SetupCountdown(Players, new System.TimeSpan(0, 0, 6));
 		StartedPreviousGame = true;
 		// First change of turn, turn = 1 from now on
 		ChangeTurn();
@@ -382,6 +382,7 @@ public class GameManager : MonoBehaviour
 	{
 		GameObject instanted = gameOverFreezeMenu.EnableMenuWithPause(true);
 		GameOverMenu menu = instanted.GetComponent<GameOverMenu>();
+		TimerController.Instance.StopAllCoroutines();
 
 		if (loser.Length > 1)
 		{
