@@ -15,8 +15,11 @@ namespace Cyberevolver.Unity
 	public class FreezeMenu : MonoBehaviour
 	{
 		[SerializeField] private KeyCode keyCodeToOpen = KeyCode.A;
+
+		public KeyCode KeyCodeToOpen { get; private set; }
 		[SerializeField] private GameObject objectToOpen = null;
 		[SerializeField] private FreezeMenu[] blockOtherFreezes = null;
+		public FreezeMenu[] BlockOtherFreezes => blockOtherFreezes;
 		[SerializeField] private bool isInitialization = true;
 
 		[SerializeField] private Transform parent = null;
@@ -34,6 +37,7 @@ namespace Cyberevolver.Unity
 		protected void Awake()
 		{
 			Instance = this;
+			SetupKeyCode(keyCodeToOpen);
 		}
 
 		protected void Update()
@@ -43,7 +47,7 @@ namespace Cyberevolver.Unity
 
 		private void WaitingForInput()
 		{
-			if (Input.GetKeyDown(keyCodeToOpen))
+			if (Input.GetKeyDown(KeyCodeToOpen))
 			{
 				MenuOpen();
 			}
@@ -93,8 +97,6 @@ namespace Cyberevolver.Unity
 			}
 
 			return tempChild;
-
-			// LeanTween.alpha(tempChild, 1f, 25f);
 		}
 
 		private bool TimeManipulate(bool isTrue)
@@ -110,6 +112,11 @@ namespace Cyberevolver.Unity
 			}
 
 			return isTrue;
+		}
+
+		public void SetupKeyCode(KeyCode keyCode)
+		{
+			KeyCodeToOpen = keyCode;
 		}
 	}
 }

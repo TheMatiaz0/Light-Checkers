@@ -14,6 +14,36 @@ public class GameOverMenu : MonoBehaviour
 	[SerializeField]
 	private FreezeMenu gameOverFreezeMenu = null;
 
+	[SerializeField]
+	private IconHighlighter[] buttons = null;
+
+	protected void OnEnable()
+	{
+		TileSelector.Instance.InputActive = false;
+		// TileSelector.Instance.DeactiveAnyHighlight();
+	}
+
+	protected void OnDisable()
+	{
+		// TileSelector.Instance.InputActive = true;
+		foreach (var item in buttons)
+		{
+			item.Enable(false);
+		}
+	}
+
+	public void SeeBoardBtn()
+	{
+		TileSelector.Instance.DeactiveAnyHighlight();
+		gameOverFreezeMenu.SetupKeyCode(KeyCode.Escape);
+
+		foreach (var item in gameOverFreezeMenu.BlockOtherFreezes)
+		{
+			item.gameObject.SetActive(false);
+		}
+		gameOverFreezeMenu.EnableMenuWithPause(false);
+	}
+
 	public void RestartGameBtn ()
 	{
 		gameOverFreezeMenu.EnableMenuWithPause(false);

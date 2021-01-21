@@ -377,16 +377,17 @@ public class GameManager : MonoBehaviour
 
 	public void SetGameOver (Player[] loser)
 	{
-		TileSelector.Instance.InputActive = false;
-		TileSelector.Instance.DeactiveAnyHighlight();
-
 		GameObject instanted = gameOverFreezeMenu.EnableMenuWithPause(true);
 		GameOverMenu menu = instanted.GetComponent<GameOverMenu>();
 
 		if (loser.Length > 1)
 		{
 			Player morePointsPlayer = loser.Aggregate((x, y) => x.Points > y.Points ? x : y);
-
+			if (morePointsPlayer == GetOtherPlayer(morePointsPlayer))
+			{
+				menu.WinInformation.text = "Draw! Both players had the same number of points.";
+				return;
+			}
 			menu.WinInformation.text = $"Draw! The more points had {morePointsPlayer.Nickname} player.";         
 			return;
 		}

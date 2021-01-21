@@ -7,26 +7,38 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
 	[SerializeField]
-	private FreezeMenu gameOverFreezeMenu = null;
+	private FreezeMenu freezeMenu = null;
 
 	[SerializeField]
 	private IconHighlighter[] buttons = null;
 
+	public void ClickResumeBtn()
+	{
+		freezeMenu.EnableMenuWithPause(false);
+	}
+
 	public void RestartGameBtn()
 	{
-		gameOverFreezeMenu.EnableMenuWithPause(false);
+		freezeMenu.EnableMenuWithPause(false);
 		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+	}
+
+	public void ClickMakeDrawBtn()
+	{
+		freezeMenu.EnableMenuWithPause(false);
+		GameManager.Instance.SetGameOver(GameManager.Players);
 	}
 
 	public void MainMenuBtn()
 	{
-		gameOverFreezeMenu.EnableMenuWithPause(false);
+		freezeMenu.EnableMenuWithPause(false);
 		SceneManager.LoadScene("Menu");
 	}
 
 	protected void OnEnable()
 	{
 		TileSelector.Instance.InputActive = false;
+		TileSelector.Instance.DeactiveAnyHighlight();
 	}
 
 	protected void OnDisable()
