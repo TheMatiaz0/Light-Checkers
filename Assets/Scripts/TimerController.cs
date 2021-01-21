@@ -27,7 +27,10 @@ public class TimerController : MonoBehaviour
 
     public void SetupCountdown(Player[] players, TimeSpan time)
 	{
-		foreach (var item in players)
+        countdownText.text = time.ToString(@"mm\:ss");
+        secondCountdown.text = time.ToString(@"mm\:ss");
+
+        foreach (var item in players)
 		{
             item.Time = (float)time.TotalSeconds;
 		}

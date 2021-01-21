@@ -124,6 +124,13 @@ public class GameOptions : MonoBehaviour
 			return;
 		}
 
+		if (string.IsNullOrEmpty(timeLimit.text))
+		{
+			AppearDisappear(ErrorInfoManager.Instance.DropdownError.rectTransform);
+			ErrorInfoManager.Instance.DropdownError.text = "Time limit is empty. Set minutes to any numeric value.";
+			return;
+		}
+
 		if (one)
 		{
 			playerOneTeam = Team.Black;
