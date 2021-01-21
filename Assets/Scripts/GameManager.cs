@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using Cyberevolver.Unity;
 using System.Text;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -68,6 +69,8 @@ public class GameManager : MonoBehaviour
 	/// </summary>
 	public static bool MoveBackwards { get; set; } = false;
 
+	public static TimeSpan MaxTime { get; set; } = new TimeSpan(0, 5, 0);
+
 
 	public static bool HideWoodenPlatforms { get; set; } = false;
 
@@ -92,10 +95,6 @@ public class GameManager : MonoBehaviour
 	[SerializeField]
 	private AudioClip[] musicClips = null;
 
-	[SerializeField]
-	private Animator timerAnimator = null;
-
-
 
 	protected void Awake()
 	{
@@ -104,9 +103,7 @@ public class GameManager : MonoBehaviour
 
 	public static Player[] GetMostDefaultPlayers()
 	{
-		// return new Player[2] { new Player(Team.Black, "TestPlayer"), new MinimaxAI(Team.White, "Bot") };
-		// return new Player[2] { new Player(Team.Black, "Nani"), new Player(Team.White, "Omewa") };
-		return new Player[2] { new Player(Team.Black, "Nani"), new RandomAI(Team.White, "Omewa") };
+		return new Player[2] { new Player(Team.Black, "PlayerUno"), new RandomAI(Team.White, "PlayerDuo") };
 	}
 
 	protected void Start()
@@ -152,7 +149,7 @@ public class GameManager : MonoBehaviour
 		DefaultSpawn(Team.White);
 		DefaultSpawn(Team.Black);
 
-		TimerController.Instance.SetupCountdown(Players, new System.TimeSpan(0, 0, 6));
+		TimerController.Instance.SetupCountdown(Players, MaxTime);
 		StartedPreviousGame = true;
 		// First change of turn, turn = 1 from now on
 		ChangeTurn();
@@ -355,7 +352,6 @@ public class GameManager : MonoBehaviour
 
 			firstRotate = true;
 		}
-
 
 		TimerController.Instance.ChangeCountdown(CurrentPlayer);
 

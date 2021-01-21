@@ -37,11 +37,14 @@ public class GameOptions : MonoBehaviour
 	[SerializeField]
 	private GameObject[] eachPlayer = null;
 
-	private Coroutine aliveCoroutine = null;
+	[SerializeField]
+	private InputField timeLimit = null;
 
 	protected void OnEnable()
 	{
-		aliveCoroutine = StartCoroutine(LoopArrayWithDelay(rules, 0.09f, 
+		Loop();
+
+		StartCoroutine(LoopArrayWithDelay(rules, 0.09f, 
 			LoopArrayWithDelay(playersSection, 0.12f, LoopArrayWithDelay(eachPlayer, 0.06f, null))));
 
 		fightBackwards.isOn = GameManager.FightBackwards;
@@ -145,14 +148,17 @@ public class GameOptions : MonoBehaviour
 		{
 			case GameManager.Mode.Local:
 				GameManager.Players = new Player[2] { new Player(playerOneTeam, allNickname.First.text), new Player(playerTwoTeam, allNickname.Second.text) };
+				GameManager.MaxTime = new TimeSpan(0, int.Parse(timeLimit.text), 0);
 				break;
 
 			case GameManager.Mode.AIAI:
 				GameManager.Players = new Player[2] { new RandomAI(playerOneTeam, allNickname.First.text), new RandomAI(playerTwoTeam, allNickname.Second.text) };
+				GameManager.MaxTime = new TimeSpan(0, int.Parse(timeLimit.text), 0);
 				break;
 
 			case GameManager.Mode.LocalAI:
 				GameManager.Players = new Player[2] { new Player(playerOneTeam, allNickname.First.text), new RandomAI(playerTwoTeam, allNickname.Second.text) };
+				GameManager.MaxTime = new TimeSpan(0, int.Parse(timeLimit.text), 0);
 				break;
 
 			case GameManager.Mode.Online:
@@ -179,10 +185,8 @@ public class GameOptions : MonoBehaviour
 		GameManager.AttackMore = isTrue;
 	}
 
-	public void ClickReturnBtn()
+	private void Loop()
 	{
-		StopAllCoroutines();
-
 		foreach (var item in rules)
 		{
 			item.SetActive(false);
@@ -197,6 +201,13 @@ public class GameOptions : MonoBehaviour
 		{
 			item.SetActive(false);
 		}
+	}
+
+	public void ClickReturnBtn()
+	{
+		StopAllCoroutines();
+
+		Loop();
 
 		MainMenu.Instance.BtnAnimation(0, true);
 	}
