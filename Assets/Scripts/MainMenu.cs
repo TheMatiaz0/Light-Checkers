@@ -40,8 +40,6 @@ public class MainMenu : MonoBehaviour
 	public readonly Color32 lightEffectColor = new Color(255, 255, 255);
 	public readonly Color32 darkEffectColor = new Color(0, 0, 0);
 
-	// private Vector2 previousVector;
-
 	protected void Awake()
 	{
 		Instance = this;
@@ -75,7 +73,6 @@ public class MainMenu : MonoBehaviour
 
 		allButtons[number].transform.SetParent(isReversed == false ? usedButtonContainer : menuButtonContainer);
 		allButtons[number].transform.SetSiblingIndex(number);
-		// allButtons[number].transform.SetAsFirstSibling();
 
 		allTextsAssociatedWithButtons[number].gameObject.SetActive(isReversed);
 
@@ -118,7 +115,13 @@ public class MainMenu : MonoBehaviour
 		author.SetupColor(new Color32((byte)author.GraphicToChange.color.r, (byte)author.GraphicToChange.color.g, (byte)author.GraphicToChange.color.b, 0), new Color32(), 0.2f);
 		mainTitle.SetupColor(new Color32((byte)author.GraphicToChange.color.r, (byte)author.GraphicToChange.color.g, (byte)author.GraphicToChange.color.b, 0), new Color32(), 0.2f);
 		version.SetupColor(new Color32((byte)author.GraphicToChange.color.r, (byte)author.GraphicToChange.color.g, (byte)author.GraphicToChange.color.b, 0), new Color32(), 0.2f);
+		StartCoroutine(ExitEnumeration());
+	}
+
+	private IEnumerator ExitEnumeration ()
+	{
 		BtnAnimation(3, false);
+		yield return new WaitForSeconds(0.5f);
 		Application.Quit(0);
 	}
 }
