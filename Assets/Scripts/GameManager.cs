@@ -388,13 +388,14 @@ public class GameManager : MonoBehaviour
 				menu.WinInformation.text = "Draw! Both players had the same number of points.";
 				return;
 			}
-			menu.WinInformation.text = $"Draw! The more points had {morePointsPlayer.Nickname} player.";         
+			menu.WinInformation.text = $"Draw! The more points had <b>{morePointsPlayer.Nickname}</b> player.";         
 			return;
 		}
-
-		menu.WinInformation.text = $"{GetOtherPlayer(loser[0]).Nickname} as {GetOtherPlayer(loser[0]).CurrentTeam} team wins!";
+		Team team = GetOtherPlayer(loser[0]).CurrentTeam;
+		string k = team == Team.Black ? "#1F1F1F" : "#C2C2C2";
+		menu.WinInformation.text = $"<b>{GetOtherPlayer(loser[0]).Nickname}</b> as <color={k}>{team}</color> team wins!";
 	}
-
+	//31, 194
 	public Player IsTherePlayerWithNoPieces()
 	{
 		return Players.FirstOrDefault(player => player.PlayerPieces.Count <= 0);
