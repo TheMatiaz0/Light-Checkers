@@ -17,6 +17,9 @@ public class MainMenu : MonoBehaviour
 	private Button[] allButtons = null;
 
 	[SerializeField]
+	private GameObject[] buttonIcons = null;
+
+	[SerializeField]
 	private MenuChangeable[] allTextsAssociatedWithButtons = null;
 
 	[SerializeField]
@@ -58,6 +61,8 @@ public class MainMenu : MonoBehaviour
 
 	public void BtnAnimation (int number, bool isReversed)
 	{
+		buttonIcons[number].SetActive(isReversed);
+
 		if (isReversed)
 		{
 			allPanelsInMenu[number + 1].SetActive(false);
@@ -67,8 +72,10 @@ public class MainMenu : MonoBehaviour
 
 		allButtons[number].interactable = isReversed;
 
+
 		allButtons[number].transform.SetParent(isReversed == false ? usedButtonContainer : menuButtonContainer);
-		allButtons[number].transform.SetAsFirstSibling();
+		allButtons[number].transform.SetSiblingIndex(number);
+		// allButtons[number].transform.SetAsFirstSibling();
 
 		allTextsAssociatedWithButtons[number].gameObject.SetActive(isReversed);
 
