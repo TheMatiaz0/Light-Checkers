@@ -1878,6 +1878,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 90e84bd7bc11bbc4d9b77f83e3d7a9e9, type: 3}
   - {fileID: 8300000, guid: 8c6ef6092ee3b4b478577ab39f551d5d, type: 3}
   - {fileID: 8300000, guid: 0a8629f75699e4a4d9317a0fc6271cdc, type: 3}
+  playerOneName: {fileID: 1696276419}
+  playerTwoName: {fileID: 1419632188}
 --- !u!4 &516697439
 Transform:
   m_ObjectHideFlags: 0
@@ -2593,6 +2595,8 @@ MonoBehaviour:
   - {fileID: 1145514397}
   - {fileID: 8148183217829159200}
   - {fileID: 8148183219005018306}
+  paused: {fileID: -5607966902321296597, guid: 777ecfa9cd88cfc4b9b0ea6f97c21877, type: 2}
+  unpaused: {fileID: 24500006, guid: 777ecfa9cd88cfc4b9b0ea6f97c21877, type: 2}
 --- !u!1 &700111994
 GameObject:
   m_ObjectHideFlags: 0
@@ -3836,6 +3840,8 @@ MonoBehaviour:
   - {fileID: 2006653277}
   - {fileID: 46939880}
   img: {fileID: 300135108}
+  paused: {fileID: 7470166244760706396, guid: 777ecfa9cd88cfc4b9b0ea6f97c21877, type: 2}
+  unpaused: {fileID: 24500006, guid: 777ecfa9cd88cfc4b9b0ea6f97c21877, type: 2}
 --- !u!1 &1113710636
 GameObject:
   m_ObjectHideFlags: 0

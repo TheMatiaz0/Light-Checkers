@@ -5,6 +5,7 @@ using System.Linq;
 using Cyberevolver.Unity;
 using System.Text;
 using System;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -57,7 +58,7 @@ public class GameManager : MonoBehaviour
 	/// <summary>
 	/// Do you have to attack enemy piece?
 	/// </summary>
-	public static bool MustAttack { get; set; } = true;
+	public static bool MustAttack { get; set; } = false;
 
 	/// <summary>
 	/// Do you have to attack a grid where more pieces are?
@@ -95,6 +96,12 @@ public class GameManager : MonoBehaviour
 	[SerializeField]
 	private AudioClip[] musicClips = null;
 
+	[SerializeField]
+	private Text playerOneName = null;
+
+	[SerializeField]
+	private Text playerTwoName = null;
+
 
 	protected void Awake()
 	{
@@ -103,7 +110,7 @@ public class GameManager : MonoBehaviour
 
 	public static Player[] GetMostDefaultPlayers()
 	{
-		return new Player[2] { new Player(Team.Black, "PlayerUno"), new RandomAI(Team.White, "PlayerDuo") };
+		return new Player[2] { new Player(Team.Black, "PlayerUno"), new Player(Team.White, "PlayerDuo") };
 	}
 
 	protected void Start()
@@ -127,6 +134,8 @@ public class GameManager : MonoBehaviour
 				ply.ResetPlayer();
 			}
 		}
+		playerOneName.text = Players[1].Nickname;
+		playerTwoName.text = Players[0].Nickname;
 
 		// NOT Selection of the first player, it will be changed anyway.
 		CurrentPlayer = Players.First(x => x.CurrentTeam == Team.Black);
@@ -142,12 +151,18 @@ public class GameManager : MonoBehaviour
 		SpawnSinglePiece(6, 5, Team.Black, pawnPrefabs);
 		*/
 
-		// SpawnSinglePiece(2, 1, Team.Black, pawnPrefabs);
-		// SpawnSinglePiece(1, 6, Team.White, pawnPrefabs);
+		SpawnSinglePiece(5, 2, Team.White, pawnPrefabs);
+		SpawnSinglePiece(6, 1, Team.Black, queenPrefabs);
+		// SpawnSinglePiece(7, 0, Team.Black, pawnPrefabs);
+
+		SpawnSinglePiece(3, 4, Team.White, pawnPrefabs);
+		SpawnSinglePiece(2, 5, Team.White, pawnPrefabs);
+
+		SpawnSinglePiece(5, 6, Team.White, pawnPrefabs);
 
 		// Spawn all pieces
-		DefaultSpawn(Team.White);
-		DefaultSpawn(Team.Black);
+		// DefaultSpawn(Team.White);
+		// DefaultSpawn(Team.Black);
 
 		TimerController.Instance.SetupCountdown(Players, MaxTime);
 		StartedPreviousGame = true;

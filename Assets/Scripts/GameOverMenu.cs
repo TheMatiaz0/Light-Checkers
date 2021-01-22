@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -29,9 +30,20 @@ public class GameOverMenu : MonoBehaviour
 	[SerializeField]
 	private Image img = null;
 
+	[SerializeField]
+	private AudioMixerSnapshot paused = null;
+
+	[SerializeField]
+	private AudioMixerSnapshot unpaused = null;
+
+	protected void Awake()
+	{
+		paused.TransitionTo(2);
+	}
 
 	protected void OnEnable()
 	{
+
 		TileSelector.Instance.InputActive = false;
 
 		foreach (var item in buttons)
@@ -48,26 +60,8 @@ public class GameOverMenu : MonoBehaviour
 		header.color = new Color32(255, 255, 255, 0);
 		gameOverText.color = new Color32(255, 255, 255, 0);
 		winInformation.color = new Color32(255, 255, 255, 0);
-		//header.SetActive(false);
-		// gameOverText.gameObjectSetActive(false);
-
 
 		LeanTween.alpha(img.rectTransform, 1, 0.6f).setIgnoreTimeScale(true).setOnComplete(() => StartCoroutine(ExpandDecos()));
-	}
-
-	private void ShowOther()
-	{
-		// header.SetActive(true);
-		// gameOverText.SetActive(true);
-
-		// LeanTween.alpha(winInformation.rectTransform, 1, 0.6f).setIgnoreTimeScale(true).setOnComplete(() => StartCoroutine(ExpandDecos()));
-
-		/*
-		LeanTween.alpha(header.rectTransform, 1, 0.2f).setIgnoreTimeScale(true).setOnComplete(() => 
-		LeanTween.alpha(gameOverText.rectTransform, 1, 0.1f).setIgnoreTimeScale(true).setOnComplete(() => 
-		LeanTween.alpha(winInformation.rectTransform, 1, 0.2f).setIgnoreTimeScale(true).setOnComplete(() => StartCoroutine(ExpandDecos()))));
-		*/
-
 	}
 
 	private IEnumerator ExpandDecos()
@@ -120,12 +114,14 @@ public class GameOverMenu : MonoBehaviour
 
 	public void RestartGameBtn ()
 	{
+		unpaused.TransitionTo(.01f);
 		gameOverFreezeMenu.EnableMenuWithPause(false);
 		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 	}
 
 	public void MainMenuBtn ()
 	{
+		unpaused.TransitionTo(.01f);
 		gameOverFreezeMenu.EnableMenuWithPause(false);
 		SceneManager.LoadScene("Menu");
 	}

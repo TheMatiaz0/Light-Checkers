@@ -2,6 +2,7 @@ using Cyberevolver.Unity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
@@ -11,6 +12,13 @@ public class PauseMenu : MonoBehaviour
 
 	[SerializeField]
 	private IconHighlighter[] buttons = null;
+
+	[SerializeField]
+	private AudioMixerSnapshot paused = null;
+
+	[SerializeField]
+	private AudioMixerSnapshot unpaused = null;
+
 
 	public void ClickResumeBtn()
 	{
@@ -37,6 +45,7 @@ public class PauseMenu : MonoBehaviour
 
 	protected void OnEnable()
 	{
+		paused.TransitionTo(0.4f);
 		foreach (var item in buttons)
 		{
 			item.Enable(true);
@@ -53,5 +62,6 @@ public class PauseMenu : MonoBehaviour
 		{
 			item.Enable(false);
 		}
+		unpaused.TransitionTo(0.25f);
 	}
 }
