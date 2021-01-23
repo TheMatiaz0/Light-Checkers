@@ -4442,6 +4442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainUI: {fileID: 585436846}
+  canvasTripod: {fileID: 1737098496}
 --- !u!1 &1224037049
 GameObject:
   m_ObjectHideFlags: 0

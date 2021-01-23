@@ -33,6 +33,9 @@ public class SettingsMenu : MonoBehaviour
 	[SerializeField]
 	private AudioMixer mixer;
 
+	[SerializeField]
+	private Toggle woodenFrame = null;
+
 	protected void OnEnable()
 	{
 		background.localScale = new Vector2(0, 0);
@@ -48,6 +51,7 @@ public class SettingsMenu : MonoBehaviour
 			LoadResolution();
 		}
 
+		woodenFrame.isOn = !GameManager.HideWoodenPlatforms;
 		qualityDropdown.value = QualitySettings.GetQualityLevel();
 		vSyncToggle.isOn = QualitySettings.vSyncCount == 1 ? true : false;
 		fullscreenToggle.isOn = Screen.fullScreen;

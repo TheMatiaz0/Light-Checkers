@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
 	public static TimeSpan MaxTime { get; set; } = new TimeSpan(0, 5, 0);
 
 
-	public static bool HideWoodenPlatforms { get; set; } = false;
+	public static bool HideWoodenPlatforms { get; set; } = true;
 
 	public static uint NumberForField { get; set; } = 0;
 
