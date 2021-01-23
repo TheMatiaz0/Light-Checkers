@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
 	/// <summary>
 	/// Do you have to attack enemy piece?
 	/// </summary>
-	public static bool MustAttack { get; set; } = false;
+	public static bool MustAttack { get; set; } = true;
 
 	/// <summary>
 	/// Do you have to attack a grid where more pieces are?
@@ -151,6 +151,7 @@ public class GameManager : MonoBehaviour
 		SpawnSinglePiece(6, 5, Team.Black, pawnPrefabs);
 		*/
 
+		/*
 		SpawnSinglePiece(5, 2, Team.White, pawnPrefabs);
 		SpawnSinglePiece(6, 1, Team.Black, queenPrefabs);
 		// SpawnSinglePiece(7, 0, Team.Black, pawnPrefabs);
@@ -159,10 +160,11 @@ public class GameManager : MonoBehaviour
 		SpawnSinglePiece(2, 5, Team.White, pawnPrefabs);
 
 		SpawnSinglePiece(5, 6, Team.White, pawnPrefabs);
+		*/
 
 		// Spawn all pieces
-		// DefaultSpawn(Team.White);
-		// DefaultSpawn(Team.Black);
+		DefaultSpawn(Team.White);
+		DefaultSpawn(Team.Black);
 
 		TimerController.Instance.SetupCountdown(Players, MaxTime);
 		StartedPreviousGame = true;

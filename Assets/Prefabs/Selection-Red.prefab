@@ -18,7 +18,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4323031452879156
 Transform:
@@ -71,6 +71,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -95,6 +96,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &3868915853814711295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,3 +109,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 395a22d7753d363439195e1b728c1347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materialToChange: {fileID: 0}

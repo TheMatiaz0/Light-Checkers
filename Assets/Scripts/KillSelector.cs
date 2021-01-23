@@ -17,10 +17,11 @@ public class KillSelector : MoveSelector
 
 	protected MoveSelector[] ChangeTurnOrKillAgain ()
 	{
-		if (Piece.GetPositionsWithEnemies(Piece.GetCombinedDirections(), PointPosition).Count() > 0)
+		MoveSelector[] moves = TileSelector.Instance.SelectPieceAndMoveOrKill(Piece, false);
+		if (moves.Length > 0)
 		{
 			TileSelector.Instance.DeactiveAnyHighlight();
-			return TileSelector.Instance.SelectPieceAndMoveOrKill(Piece);
+			return moves;
 		}
 
 		ChangeTurn();

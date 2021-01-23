@@ -99,7 +99,7 @@ public class TileSelector : MonoBehaviour
 	/// After selected piece...
 	/// </summary>
 	/// <param name="selectedPiece"></param>
-	public MoveSelector[] SelectPieceAndMoveOrKill (Piece selectedPiece)
+	public MoveSelector[] SelectPieceAndMoveOrKill (Piece selectedPiece, bool shouldMove = true)
 	{
 		if (lastPiece != null)
 		{
@@ -118,7 +118,10 @@ public class TileSelector : MonoBehaviour
 
 			else
 			{
-				allSelectors.Add(CreateMoveSelect(selectedPiece, pieceWithGrid.Key));
+				if (shouldMove)
+				{
+					allSelectors.Add(CreateMoveSelect(selectedPiece, pieceWithGrid.Key));
+				}
 			}
 		}
 

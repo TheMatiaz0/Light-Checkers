@@ -52,7 +52,7 @@ public class PauseMenu : MonoBehaviour
 		}
 
 		TileSelector.Instance.InputActive = false;
-		TileSelector.Instance.DeactiveAnyHighlight();
+		// TileSelector.Instance.DeactiveAnyHighlight();
 	}
 
 	protected void OnDisable()
