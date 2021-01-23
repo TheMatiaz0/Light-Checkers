@@ -3558,7 +3558,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Determines if pieces must attack always more enemy pieces, even in
     disadvantage.
-  descrSprite: {fileID: 0}
+  descrSprite: {fileID: 21300000, guid: ddbecf153c9a6e14f86db0f2f6627bdd, type: 3}
 --- !u!114 &423211965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6362,7 +6362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Every spawned pawn is automatically <i>king</i> at the beginning.
-  descrSprite: {fileID: 0}
+  descrSprite: {fileID: 21300000, guid: 1a113576c5e992544a1094b1e7aa259a, type: 3}
 --- !u!114 &847647832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8544,7 +8544,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Determines the backward attack on a enemy piece.
-  descrSprite: {fileID: 0}
+  descrSprite: {fileID: 21300000, guid: 006801c08f5fb2942ac8ab7c9868e611, type: 3}
 --- !u!114 &1053319572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9199,7 +9199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Determines if pieces must attack as soon as possible.
-  descrSprite: {fileID: 0}
+  descrSprite: {fileID: 21300000, guid: ad265703b416eb942b2840dc30aa7668, type: 3}
 --- !u!114 &1148869681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15405,7 +15405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

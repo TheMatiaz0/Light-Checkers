@@ -38,7 +38,11 @@ public class InfoBoxManager : MonoBehaviour
 		canFollow = true;
 		description.text = descr;
 		if (sprite != null)
+		{
 			descriptiveImage.sprite = sprite;
+			descriptiveImage.preserveAspect = true;
+		}
+
 		infoBox.SetActive(true);
 	}
 
