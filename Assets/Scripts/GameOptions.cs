@@ -49,7 +49,7 @@ public class GameOptions : MonoBehaviour
 
 		fightBackwards.isOn = GameManager.FightBackwards;
 		mustAttack.isOn = GameManager.MustAttack;
-		walkBackwards.isOn = GameManager.MoveBackwards;
+		walkBackwards.isOn = GameManager.EveryKing;
 		moreAttacks.isOn = GameManager.AttackMore;
 	}
 
@@ -179,7 +179,7 @@ public class GameOptions : MonoBehaviour
 
 	public void WalkBackwardsCheck(bool isTrue)
 	{
-		GameManager.MoveBackwards = isTrue;
+		GameManager.EveryKing = isTrue;
 	}
 
 	public void SelectModeDropdown(int option)

@@ -4967,7 +4967,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 48.666}
+  m_AnchoredPosition: {x: 0, y: 38}
   m_SizeDelta: {x: -24.9218, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &714484113
@@ -5018,7 +5018,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Walk Backwards
+  m_Text: Everyking
 --- !u!222 &714484115
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6306,7 +6306,7 @@ GameObject:
   - component: {fileID: 847647827}
   - component: {fileID: 847647828}
   m_Layer: 5
-  m_Name: WalkBackward
+  m_Name: Everyking
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6361,7 +6361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f047de973ae442449b773b5b376ee3b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Determines if <i>pawn</i> can move backwards.
+  description: Every spawned pawn is automatically <i>king</i> at the beginning.
   descrSprite: {fileID: 0}
 --- !u!114 &847647832
 MonoBehaviour:

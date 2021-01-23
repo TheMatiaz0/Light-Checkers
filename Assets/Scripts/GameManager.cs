@@ -66,14 +66,14 @@ public class GameManager : MonoBehaviour
 	public static bool AttackMore { get; set; } = true;
 
 	/// <summary>
-	/// Can pawns walk backwards?
+	/// Is every pawn is a king piece?
 	/// </summary>
-	public static bool MoveBackwards { get; set; } = false;
+	public static bool EveryKing { get; set; } = false;
 
 	public static TimeSpan MaxTime { get; set; } = new TimeSpan(0, 5, 0);
 
 
-	public static bool HideWoodenPlatforms { get; set; } = true;
+	public static bool HideWoodenPlatforms { get; set; } = false;
 
 	public static uint NumberForField { get; set; } = 0;
 
@@ -162,9 +162,11 @@ public class GameManager : MonoBehaviour
 		SpawnSinglePiece(5, 6, Team.White, pawnPrefabs);
 		*/
 
+
 		// Spawn all pieces
-		DefaultSpawn(Team.White);
-		DefaultSpawn(Team.Black);
+		IReadOnlyList<Piece> pieces = EveryKing == true ? (IReadOnlyList<Piece>)(queenPrefabs as IReadOnlyList<Queen>) : (IReadOnlyList<Piece>)(pawnPrefabs as IReadOnlyList<Pawn>);
+		DefaultSpawn(Team.White, pieces);
+		DefaultSpawn(Team.Black, pieces);
 
 		TimerController.Instance.SetupCountdown(Players, MaxTime);
 		StartedPreviousGame = true;
@@ -172,7 +174,7 @@ public class GameManager : MonoBehaviour
 		ChangeTurn();
 	}
 
-	private void DefaultSpawn(Team team, Piece[] figures = null)
+	private void DefaultSpawn(Team team, IReadOnlyList<Piece> figures = null)
 	{
 		for (int i = ((int)team * (Height - 3)); i < (team == Team.Black ? 3 : 8); i++)
 		{
@@ -185,7 +187,7 @@ public class GameManager : MonoBehaviour
 	/// </summary>
 	/// <param name="row"></param>
 	/// <param name="team"></param>
-	private void SpawnLine (int row, Team team, Piece[] figures)
+	private void SpawnLine (int row, Team team, IReadOnlyList<Piece> figures)
 	{
 		for (int col = 0; col < Width; col++)
 		{
@@ -198,7 +200,7 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	public Piece SpawnSinglePiece (int col, int row, Team pieceTeam, Piece[] figures, bool shouldAdd = true)
+	public Piece SpawnSinglePiece (int col, int row, Team pieceTeam, IReadOnlyList<Piece> figures, bool shouldAdd = true)
 	{
 		Piece newlyPiece = board.AddPiece(figures[(int)pieceTeam], col, row);
 
