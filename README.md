@@ -5,4 +5,4 @@ Made in Unity 2020.2.1f1.
 
 All Rights Reserved
 
-2020 - Mateusz "TheMatiaz0" Kusionowicz.
+2020-2021 Mateusz "TheMatiaz0" Kusionowicz.
